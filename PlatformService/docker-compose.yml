@@ -1,0 +1,23 @@
+﻿version: '3.7'
+
+services:
+  platform-service:
+    user: root
+    image: ${DOCKER_REGISTRY-}platform-service
+    build:
+      context: .
+      dockerfile: PlatformService/Dockerfile
+    ports:
+      - "42111:8080"
+      - "42113:8081"
+    networks:
+      - microservice-tutorial-network
+      - rabbitmq-local-network
+
+networks:
+  microservice-tutorial-network:
+    name: microservice-tutorial-network
+    driver: bridge
+  rabbitmq-local-network:
+    name: rabbitmq-local-network
+    external: true

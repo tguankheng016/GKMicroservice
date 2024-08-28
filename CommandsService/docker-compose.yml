@@ -1,0 +1,22 @@
+﻿version: '3.7'
+
+services:
+  commands-service:
+    user: root
+    image: ${DOCKER_REGISTRY-}commands-service
+    build:
+      context: .
+      dockerfile: CommandsService/Dockerfile
+    ports:
+      - "42122:8080"
+    networks:
+      - microservice-tutorial-network
+      - rabbitmq-local-network
+
+networks:
+  microservice-tutorial-network:
+    name: microservice-tutorial-network
+    external: true
+  rabbitmq-local-network:
+    name: rabbitmq-local-network
+    external: true
